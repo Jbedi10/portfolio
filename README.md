@@ -3,7 +3,7 @@ midterm and final portfolio for STA 518
 
 For this portfolio project I am going to attemtp to create a program that can predict the second half of the Premier League - and in turn show the winner!
 
-#Table of Contents.
+# Table of Contents.
 
 1. Import, manage, and clean data.
 2. Create graphical displays and numerical summaries of data for exploratory analysis and presentations.
