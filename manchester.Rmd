@@ -7,22 +7,251 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+The data was scrapped from the Premier League website and is representative of seasons 2006/2007 to 2017/2018. 
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+There will be a lot of graphs to look at the data and make comparisons of some teams.  The data sets were looked at separately even though they are highly correlated with each other.  
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+I should also say that i look at Manchester United a lot in this project. I am not a fan, actually the complete opposite. I despise United so I wanted to analyze their data from the past years. 
 
-```{r cars}
-summary(cars)
+```{r, message = FALSE}
+
+library("ggplot2")
+library("dplyr")
+library("RColorBrewer")
+library("ggrepel")
+library("gridExtra")
+library("reshape2")
+library("data.table")
+library("corrplot")
+
+```
+## Load Data
+
+Load the data and take a look at it and then do some data wrangling
+
+```{r echo = FALSE}
+
+stats = read.csv("~/STA 518/Final Project/Portfolio/Final Proposal/Final Draft Portfolio/results.csv")
+
+head(stats)
+
+str(stats)
+
+stats[is.na(stats)] = 0
+
+summary(stats)
+
+results = read.csv("~/STA 518/Final Project/Portfolio/Final Proposal/Final Draft Portfolio/results.csv")
+
+head(results)
+
+str(results)
+
+summary(results)
 ```
 
-## Including Plots
+# Results Analysis
 
-You can also embed plots, for example:
+## Season Breakdown
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+### Results
+
+First look at the results as they are the most important thing in the game.
+
+```{r echo = FALSE, fig.align = 'default', warning = FALSE, fig.width=30, fig.height=30, fig.cap="Results by Season"}
+
+results %>%
+  group_by(result, season) %>%
+  count() %>%
+  ggplot(aes(reorder(result, n), y = n, fill = n))  +   
+  geom_bar(stat = "identity", position = "dodge") + 
+  xlab("Results") +
+  ylab("Results Count") +
+  facet_wrap( ~ season) +
+  scale_fill_gradientn(name = '',colours = rev(brewer.pal(10,'Spectral'))) + 
+  theme(legend.position ='none',axis.title.y = element_text(size=50), axis.text.y = element_text(size = 25),axis.title.x = element_text(size=50),axis.text.x = element_text(size = 45), plot.title = element_text(size=50, hjust = 0.5), strip.text.x = element_text(size=25, face="bold"),
+          strip.background = element_rect(colour="red", fill="#CCCCFF")) +
+  geom_text(aes(label = n), vjust = -0.3, size = 10.5) +
+  ggtitle('Results Count through the seasons')
+
+```
+There is a theory that says there is an advantage to playing games at home.  In the premier league everyone plays the same number of games at home so that they can take that advantage out of the question.  **Through the seasons we can see that the home team has more wins than the away teams.**  There are also more draws than away team wins for the most part through the seasons.
+
+### Goals
+
+With home teams winning more games there should be more home team goals, right?
+
+```{r echo = FALSE, fig.align = 'default', warning = FALSE, fig.width=30, fig.height=30, fig.cap="Goals by Season"}
+
+tot_home_goals = results %>%
+  group_by(season) %>%
+  summarise(total_home_goals = sum(home_goals)) %>%
+  ggplot(aes(x = season, y = total_home_goals, fill = total_home_goals))  +   
+  geom_bar(stat = "identity", position = "dodge") +
+  xlab("Season") +
+  ylab("Total Home Goals") +
+  theme(legend.position ='none',axis.title.y = element_text(size=50), axis.text.y = element_text(size = 25), axis.title.x = element_text(size=50),axis.text.x = element_text(angle = 90, size = 25), plot.title = element_text(size=50, hjust = 0.5)) +
+  scale_fill_gradientn(name = '',colours = rev(brewer.pal(10,'Spectral'))) +
+  geom_text(aes(label = total_home_goals), vjust = -0.3, size = 10.5) +
+  ggtitle("Total Home Goals by Season")
+
+tot_away_goals = results %>%
+  group_by(season) %>%
+  summarise(total_away_goals = sum(away_goals)) %>%
+  ggplot(aes(x = season, y = total_away_goals, fill = total_away_goals))  +   
+  geom_bar(stat = "identity", position = "dodge") +
+  xlab("Season") +
+  ylab("Total Away Goals") +
+  theme(legend.position ='none',axis.title.y = element_text(size=50), axis.text.y = element_text(size = 25), axis.title.x = element_text(size=50),axis.text.x = element_text(angle = 90, size = 25), plot.title = element_text(size=50, hjust = 0.5)) +
+  scale_fill_gradientn(name = '',colours = rev(brewer.pal(10,'Spectral'))) +
+  geom_text(aes(label = total_away_goals), vjust = -0.3, size = 10.5) +
+  ggtitle("Total Away Goals by Season")
+
+grid.arrange(tot_home_goals, tot_away_goals, ncol = 1, nrow = 2)
+
+```
+The year when **home teams scored the most goals was in 2009/2010 with 645 goals.**  The season when home teams had a hard time scoring goals was in the 2008/2009 season.  The **number of goals scored by the home teams** seems to change from season to season and **is always more than the away team goals.** 
+
+Away teams have a hard time scoring goals and this should be clear from what we have already looked at with regards to the results.  The season when the **away teams were able to score goals more freely than others was the 2012/2013 season with 471 goals.**  2006/2007 was a tough season for the away teams as they only managed to only score 379 goals all season.
+
+### Team Wins
+
+Making your home stadium a fortress is key on any campaign for the title.
+
+```{r echo = FALSE, fig.align = 'default', warning = FALSE, fig.width=40, fig.height=30, fig.cap="Team Wins"}
+
+home_win = results %>%
+  filter(result == "H") %>%
+  group_by(home_team, result) %>%
+  summarise(count=n()) %>%
+  arrange(desc(count)) %>%
+  ggplot(aes(x=reorder(factor(home_team), count), y=count, fill = count)) + 
+  geom_bar(stat = "identity", position = "dodge") + 
+  xlab("Team") + 
+  ylab("Wins") +
+  theme(legend.position ='none',axis.title.y = element_text(size=50), axis.text.y = element_text(size = 25), axis.title.x = element_text(size=50),axis.text.x = element_text(angle = 90, size = 25), plot.title = element_text(size=50, hjust = 0.5)) +
+  scale_fill_gradientn(name = '',colours = rev(brewer.pal(10,'Spectral'))) +
+  geom_text(aes(label = count), hjust = -0.3, size = 7.5) +
+  ggtitle("Teams with the most home wins \nin the English Premier League from \n2006/07 to 2017/18") + 
+  coord_flip()
+
+away_win = results %>%
+  filter(result == "A") %>%
+  group_by(away_team, result) %>%
+  summarise(count=n()) %>%
+  arrange(desc(count)) %>%
+  ggplot(aes(x=reorder(factor(away_team), count), y=count, fill = count)) + 
+  geom_bar(stat = "identity", position = "dodge") + 
+  xlab("Team") + 
+  ylab("Wins") +
+  theme(legend.position ='none',axis.title.y = element_text(size=50), axis.text.y = element_text(size = 25), axis.title.x = element_text(size=50),axis.text.x = element_text(angle = 90, size = 25), plot.title = element_text(size=50, hjust = 0.5)) +
+  scale_fill_gradientn(name = '',colours = rev(brewer.pal(10,'Spectral'))) +
+  geom_text(aes(label = count), hjust = -0.3, size = 7.5) +
+  ggtitle("Teams with the most away wins \nin the English Premier League from \n2006/07 to 2017/18") + 
+  coord_flip()
+
+grid.arrange(home_win, away_win, ncol = 2, nrow = 1)
+
+home_wins = results %>%
+  filter(result == "H") %>%
+  group_by(home_team, result) %>%
+  summarise(count=n()) %>%
+  arrange(desc(count))
+
+away_wins = results %>%
+  filter(result == "A") %>%
+  group_by(away_team, result) %>%
+  summarise(count=n()) %>%
+  arrange(desc(count))
+
+home_wins = rename(home_wins, "Team" = "home_team")
+away_wins = rename(away_wins, "Team" = "away_team")
+away_wins[nrow(away_wins) + 1,] = list("Derby County", "A", 0)
+
+overall_wins = merge(home_wins, away_wins, by="Team")
+overall_wins$wins = overall_wins$count.x + overall_wins$count.y
+
+ggplot(overall_wins, aes(x=reorder(factor(Team), wins), y=wins, fill = wins)) + 
+  geom_bar(stat = "identity", position = "dodge") + 
+  xlab("Team") + 
+  ylab("Wins") + 
+  theme(legend.position ='none',axis.title.y = element_text(size=50), axis.text.y = element_text(size = 25), axis.title.x = element_text(size=50),axis.text.x = element_text(angle = 90, size = 25), plot.title = element_text(size=50, hjust = 0.5)) +
+  scale_fill_gradientn(name = '',colours = rev(brewer.pal(10,'Spectral'))) +
+  geom_text(aes(label = wins), hjust = -0.3, size = 10.5) +
+  ggtitle("Number of Overall wins in the English Premier League from 2006/07 to 2017/18") +
+  coord_flip()
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+**The Manchester clubs know how to defend their turf with the Red Devils being the best home team out of all the teams that played in the premier league during the time in question.**  Derby County only had one win at home and none away.  **The Theatre of Dreams is regarded as one of the best stadiums in the world and the Red Devils know how to take advantage of that and get wins.  The North London rivals also know how to defend their home turf with the red side being better.**
+
+**Going on the road and winning games is always tough but Chelsea have found a way to make themselves the best at it.**  On their heels are the Red Devils and this should not be a shocker as these two teams have dominated the game in recent years.  The title is usually won by the team that makes their home stadium a fortress and then goes on the road and manages to nick a few results.  **Arsenal did not win any away games in the second half of the 2017/18 season but they still came in third place with their 103 road wins.**
+
+**Manchester United has been regarded as the best English team for a long time and the number of wins they have ammased in recent times show that they are still the best team in England.**  Chelsea are now on their heels and this might be due to the investment from their owner and the same can be said about Manchester City.  The Citizens have seen a change in fortunes with the arrival on the scene of their new Middle Eastern owners.  The Citizens have made investments into the team and this has shown up on the field with the number of wins they have amassed.
+
+### Manchester Rivalry
+
+Once referred to as the noisy neighbors, City have managed to surpass their neighbors in recent years.  There has been a lot of investment in both teams but it is looking as if City has made the better investments.
+
+```{r echo = FALSE, fig.align = 'default', warning = FALSE, fig.width=30, fig.height=30, fig.cap="Manchester Rivalry by Season"}
+
+city_home_wdl = results %>% 
+  filter(home_team == "Manchester City") %>%
+  rename(team = home_team) %>%
+  mutate(results = (if_else (result == "H", "Win", if_else(result == "D", "Draw", "Loss")))) %>%
+  select(team, season, results)
+
+city_away_wdl = results %>% 
+  filter(away_team == "Manchester City") %>%
+  rename(team = away_team) %>%
+  mutate(results = (if_else (result == "A", "Win", if_else(result == "D", "Draw", "Loss")))) %>%
+  select(team, season, results)
+
+city_wdl = rbind(city_away_wdl, city_home_wdl)
+
+city_wdl_count = city_wdl %>%
+  group_by(team, season, results) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count))
+
+united_home_wdl = results %>% 
+  filter(home_team == "Manchester United") %>%
+  rename(team = home_team) %>%
+  mutate(results = (if_else (result == "H", "Win", if_else(result == "D", "Draw", "Loss")))) %>%
+  select(team, season, results)
+
+united_away_wdl = results %>% 
+  filter(away_team == "Manchester United") %>%
+  rename(team = away_team) %>%
+  mutate(results = (if_else (result == "A", "Win", if_else(result == "D", "Draw", "Loss")))) %>%
+  select(team, season, results)
+
+united_wdl = rbind(united_away_wdl, united_home_wdl)
+
+united_wdl_count = united_wdl %>%
+  group_by(team, season, results) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count)) 
+  
+manchester_wdl = rbind(city_wdl_count, united_wdl_count)
+
+manchester_wdl %>%
+  mutate(counts = ifelse(team=='Manchester United',count,-count)) %>%
+  ggplot(aes(y = counts, x = season, fill = results)) + 
+  geom_bar(stat="identity") + 
+  scale_fill_brewer(name="",palette='Set1') + 
+  scale_y_continuous(breaks=c(-38,seq(-30,30,5),38),labels=abs) + 
+  geom_hline(yintercept=0,alpha=.5) + 
+  geom_hline(yintercept=-30,alpha=.5) + 
+  geom_hline(yintercept=-15,alpha=.5) +
+  geom_hline(yintercept=15,alpha=.5) + 
+  geom_hline(yintercept=30,alpha=.5)  +
+  labs(title='Manchester City                                                                                Manchester United', subtitle='by number of Wins, Draws and Losses') +
+  coord_flip() + 
+  theme(legend.position ='bottom',legend.text=element_text(size=25), axis.text.y = element_text(size = 25),axis.text.x = element_text(size = 25), plot.title = element_text(size=50), plot.subtitle = element_text(size = 25))
+
+```
+
+**Red Devils fans will not like the look of this graph in recent seasons.  City has been performing better than their bitter rivals.  The noisy neighbors have been making more noise in recent seasons.**  
+
+
