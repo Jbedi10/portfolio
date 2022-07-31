@@ -6,23 +6,6 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+## What part of the class surprised or interested you the most? Explain why.
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+The no grading system for sure surprised me the most. I have NEVER been in a class where I didnt earn a grade for every assignment that I did. I like this style of class because if you do the work now you'll reap the rewards. Anyone can memorize something for a test. This class makes you work, but in a good way. Im sure people could get away with not doing much in the class, but since I am going to be using these techniques in my work, I am learning for myself, not a grade! I also found it quite surprising how much i enjoyed learning R. Usually when it comes to coding / coding langauges it is quite difficult to learn. For example Java. I am so lost in those type of courses. Here I was able to learn comfortably. As i said earlier a few things trasnfer from python to R. Such as creating dataframes and manipulating data. So I did catch on early and was able to ask the right questions. I also found it suprising how much I liked this class to be quite honest. I wasnt sure what I was getting into when taking this class. I now wish I would have taken higher level stats classes in my undergrad. I am very pleased with what I have learned!

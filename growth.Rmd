@@ -7,22 +7,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Growth as a person in data
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Growth as a Data Person: I believe once finished with STA 518 my ability to create tools for visualization will have immensly increased. This is my first course with R and I am thourghouly enjoying every minute. I have mostly work in Python for coding so I like how coding in R is done. I have taken a Java class before and was completely lost to say the least. I beleive this course will help me grow in my professional life as well. We are about half way through the course now, I am excited to work on this project solo and the group project. Once those are complete I believe my ability to tell stories with data will be a great tool to bring to my future employers! I do feel I have a good grasp on most of, if not all the libraries we covered in class such as: ggplot, diplyr, tidyverse, rmarkdown, distill. Which I believe are crucial for creating statiscal analysis. As I have said, this is my first real high level stats course. I came in not knowing much but I do believe if it came down to it, I could import data, clean it and graph it in numerous ways in R. I am not sure how widespread R is in the field of work I would like to go into. But as I said, I do believe I can confidentally tell my employer I am comfortable using R/R studio. I know what kind of questions will be asked and how to navigate those problems. I am not sure how exporting works that great. But I am sure i could figure it out. I am actually looking forward to my next stats course in the data analytics prorgram as I now feel I have the 1st and 2nd layer of knowledge to create statistical analysis!
