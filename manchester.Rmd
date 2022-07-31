@@ -239,19 +239,12 @@ manchester_wdl %>%
   mutate(counts = ifelse(team=='Manchester United',count,-count)) %>%
   ggplot(aes(y = counts, x = season, fill = results)) + 
   geom_bar(stat="identity") + 
-  scale_fill_brewer(name="",palette='Set1') + 
-  scale_y_continuous(breaks=c(-38,seq(-30,30,5),38),labels=abs) + 
-  geom_hline(yintercept=0,alpha=.5) + 
-  geom_hline(yintercept=-30,alpha=.5) + 
-  geom_hline(yintercept=-15,alpha=.5) +
-  geom_hline(yintercept=15,alpha=.5) + 
-  geom_hline(yintercept=30,alpha=.5)  +
   labs(title='Manchester City                                                                                Manchester United', subtitle='by number of Wins, Draws and Losses') +
   coord_flip() + 
   theme(legend.position ='bottom',legend.text=element_text(size=25), axis.text.y = element_text(size = 25),axis.text.x = element_text(size = 25), plot.title = element_text(size=50), plot.subtitle = element_text(size = 25))
 
 ```
 
-**Red Devils fans will not like the look of this graph in recent seasons.  City has been performing better than their bitter rivals.  The noisy neighbors have been making more noise in recent seasons.**  
+**Red Devils fans will not like the look of this graph in recent seasons.  City has been performing better than their bitter rivals.  The noisy neighbors have been making more noise in recent seasons.**
 
 
