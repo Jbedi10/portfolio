@@ -21,10 +21,10 @@ Grade.Rmd - This file contains my response to the grade talk for me and professo
 5. Write clear, efficient, and well-documented R programs.
 
 How I will fulfill the course objectives with my portfolio project:
-1. https://datahub.io/sports-data/english-premier-league#resource-season-1819
-2. I will be able to show 'Goals-For' and 'Goals-Against' - determining weak offense and strong defense / vice-versa.
-3. This project will take data from the first half of the season and try to predict the winner 
-4. Footnotes will be used throughout this project
+1. ~/STA 518/Final Project/Portfolio/Final Proposal/Final Draft Portfolio/results.csv - groupby statements, mutate statements, summarise statments, clean NA.
+2. I will be able to create graphs for overall wins / overall goals for all teams in the premier league to show how manchester united stacks up agains the competition. And from their be able to create analysis once graphs are plotted. 
+3. https://www.rdocumentation.org/ was my go to for trouble shooting 
+4. https://www.rdocumentation.org/ helped me trouble shoot parameters for multiple graphs on my project. 
 
 
 
