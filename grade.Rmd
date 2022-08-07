@@ -67,5 +67,7 @@ ggplot(overall_wins, aes(x=reorder(factor(Team), wins), y=wins, fill = wins)) +
 Write R programs for simulations from probability models and randomization-based experiments: Welp, here we are.. the course objective that I was not able to complete. To be quite honest I have no idea how to do this or even where to start. This is the reason why I believe I did not earn a full A or A+ . I wish I was able to say on my reflection that I earned the full A, but I have no idea where to start with this or anything along those lines. Im hoping you understand that I just do not know how to do it. I could have tried, but like I said I didnt even know where to start. 
 
 Use source documentation and other resources to troubleshoot and extend R programs.
-
 Write clear, efficient, and well-documented R programs.
+
+I do believe that my code is effiecient or as effiecient as it can be.. and it is readable. So I believe that this part of the course objective was completed. Sometimes I feel like I am writting too much / taking too many steps to get to where I want to be. But sometimes it helps me work things out and get to the final code correctly. When I jump corners thats when I start to run into errors. However, I do feel my code is easy to follow and easy to read!
+
