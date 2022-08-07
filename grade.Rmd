@@ -9,3 +9,5 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Grade Reflection
 
+# What Grade Did You Earn? I believe that I earned an A- in STA 518.
+
