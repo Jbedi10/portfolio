@@ -11,3 +11,37 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # What Grade Did You Earn? I believe that I earned an A- in STA 518.
 
+# How Did You Demonstrate That Grade? 
+So for our grades, the course objectives is what we are to base our argument on. The reason I believe I earned an A- in this class would be based on the following:
+
+Import, manage, and clean data: This one is pretty straight forward as i was able to import the results.csv. In the load phase I did get rid of all NA although I did not believe there were to be any, but this is one thing i like to make sure I do before any analysis is started. Also in my graph code chunks I use groupby, filter and summarise to manage data and extract the data I need. I do believe my understanding of this course objective is very good. This section came natural to me and I was able to learn rather quickly. I think I aced this part of the course objectives. I was not caught up by anything and learned the rules and parameters of functions very easily!
+## Load Data
+
+```{r echo = FALSE}
+
+stats = read.csv("~/STA 518/Final Project/Portfolio/Final Proposal/Final Draft Portfolio/results.csv")
+
+head(stats)
+
+str(stats)
+
+stats[is.na(stats)] = 0
+
+summary(stats)
+
+results = read.csv("~/STA 518/Final Project/Portfolio/Final Proposal/Final Draft Portfolio/results.csv")
+
+head(results)
+
+str(results)
+
+summary(results)
+```
+
+Create graphical displays and numerical summaries of data for exploratory analysis and presentations.
+
+Write R programs for simulations from probability models and randomization-based experiments: Welp, here we are.. the course objective that I was not able to complete. To be quite honest I have no idea how to do this or even where to start. This is the reason why I believe I did not earn a full A or A+ . I wish I was able to say on my reflection that I earned the full A, but I have no idea where to start with this or anything along those lines. Im hoping you understand that I just do not know how to do it. I could have tried, but like I said I dint even know where to start. 
+
+Use source documentation and other resources to troubleshoot and extend R programs.
+
+Write clear, efficient, and well-documented R programs.
