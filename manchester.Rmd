@@ -57,6 +57,7 @@ summary(results)
 ### Results
 
 First look at the results as they are the most important thing in the game.
+In this graph I just wanted to display the number of wins, draws and loses there were in each season. This will give us an idea of where the distribution for wins/losses will avg from the seasons we are looking into. This will also give us a baseline of whether or not the league has gotten harder or easier over the years. Obviously if competition goes up, loses will go down and vise-versa. So here we go:
 
 ```{r echo = FALSE, fig.align = 'default', warning = FALSE, fig.width=30, fig.height=30, fig.cap="Results by Season"}
 
