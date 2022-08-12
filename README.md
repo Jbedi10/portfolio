@@ -4,7 +4,7 @@ midterm and final portfolio for STA 518
 For this portfolio project I changed it from a perdiction model as I was struggling to figure out the funtions for that. However, I did create a deep dive into the Premier League seasons of 06 - 18. I am a huge Chelsea fan, and majority of my friends who watch the premier League are huge Mancheseter United fans. We go back and forth as to which team is better. So I did a comparison of stats soley focused on Manchester United, "The biggest team in world football"
 
 ## Table of Contents.
-Lightning Round Essays - https://github.com/Jbedi10/portfolio/blob/main/lightning.Rmd
+Lightning Round Essays - https://github.com/Jbedi10/portfolio/blob/main/lightning.md
 
 Manchester.Rmd - https://github.com/Jbedi10/portfolio/blob/main/manchester.Rmd
 
