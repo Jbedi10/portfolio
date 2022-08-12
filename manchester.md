@@ -5,10 +5,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-The data was scrapped from the Premier League website and is representative of seasons 2006/2007 to 2017/2018. 
-
-There will be a lot of graphs to look at the data and make comparisons of some teams.  The data sets were looked at separately even though they are highly correlated with each other.  
+The data sets were looked at separately even though they are highly correlated with each other.  
 
 I should also say that i look at Manchester United a lot in this project. I am not a fan, actually the complete opposite. I despise United so I wanted to analyze their data from the past years. 
 
