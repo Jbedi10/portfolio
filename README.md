@@ -5,8 +5,11 @@ For this portfolio project I changed it from a perdiction model as I was struggl
 
 ## Table of Contents.
 Lightning Round Essays - https://github.com/Jbedi10/portfolio/blob/main/lightning.Rmd
+
 Manchester.Rmd - https://github.com/Jbedi10/portfolio/blob/main/manchester.Rmd
+
 Growth.Rmd - https://github.com/Jbedi10/portfolio/blob/main/growth.Rmd
+
 Grade.Rmd - https://github.com/Jbedi10/portfolio/blob/main/grade.Rmd
 
 
