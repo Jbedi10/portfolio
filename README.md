@@ -8,7 +8,7 @@ Lightning Round Essays - https://github.com/Jbedi10/portfolio/blob/main/lightnin
 
 Manchester.Rmd - https://github.com/Jbedi10/portfolio/blob/main/manchester.Rmd
 
-Growth.Rmd - https://github.com/Jbedi10/portfolio/blob/main/growth.Rmd
+Growth.Rmd - https://github.com/Jbedi10/portfolio/blob/main/growth.md
 
 Grade.Rmd - https://github.com/Jbedi10/portfolio/blob/main/grade.Rmd
 
