@@ -6,11 +6,11 @@ For this portfolio project I changed it from a perdiction model as I was struggl
 ## Table of Contents.
 Lightning Round Essays - https://github.com/Jbedi10/portfolio/blob/main/lightning.md
 
-Manchester.Rmd - https://github.com/Jbedi10/portfolio/blob/main/manchester.md
+Manchester.md - https://github.com/Jbedi10/portfolio/blob/main/manchester.md
 
-Growth.Rmd - https://github.com/Jbedi10/portfolio/blob/main/growth.md
+Growth.md - https://github.com/Jbedi10/portfolio/blob/main/growth.md
 
-Grade.Rmd - https://github.com/Jbedi10/portfolio/blob/main/grade.md
+Grade.md - https://github.com/Jbedi10/portfolio/blob/main/grade.md
 
 
 ## Course Objectives
